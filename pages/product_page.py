@@ -5,15 +5,15 @@ import time
 
 class ProductPage(BasePage):
     def get_book_name(self):
-        book_name = self.browser.find_element(*BasketLocators.BOOK_NAME).text
+        book_name = self.browser.find_element(*ProductPageLocators.BOOK_NAME).text
         return book_name
 
     def get_book_price(self):
-        price = self.browser.find_element(*BasketLocators.PRICE).text
+        price = self.browser.find_element(*ProductPageLocators.PRICE).text
         return price
 
     def add_to_basket(self):
-        add_to_basket_btn = self.browser.find_element(*BasketLocators.ADD_TO_BASKET_BTN)
+        add_to_basket_btn = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BTN)
         add_to_basket_btn.click()
         self.solve_quiz_and_get_code()
 

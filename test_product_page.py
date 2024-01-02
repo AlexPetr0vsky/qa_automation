@@ -1,11 +1,12 @@
 import pytest
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 
 
 @pytest.mark.parametrize('number', [*[str(x) for x in range(10) if x != 7],
                                   pytest.param("7",
                                                marks=pytest.mark.xfail)])
-def test_guest_can_add_product_to_basket(browser):
+def test_guest_can_add_product_to_basket(browser, number):
     link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{number}"
     basket = ProductPage(browser, link)
     basket.open()
@@ -36,6 +37,15 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     basket.open()
     basket.add_to_basket()
     basket.should_not_be_success_message()
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_basket()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.should_be_empty_basket()
 
 
 def test_guest_cant_see_success_message(browser):
