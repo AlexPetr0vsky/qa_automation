@@ -15,7 +15,7 @@ class ProductPage(BasePage):
     def add_to_basket(self):
         add_to_basket_btn = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BTN)
         add_to_basket_btn.click()
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()
 
     def should_be_the_same_book_name(self, book_name):
         book_name_in_basket = self.browser.find_element(*BasketLocators.BOOK_IN_BASKET).text
